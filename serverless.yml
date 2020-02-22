@@ -13,4 +13,4 @@ functions:
       - http:
           path: tasks
           method: get
-          ors: true
+          cors: true
