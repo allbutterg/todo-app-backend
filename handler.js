@@ -5,8 +5,39 @@ const express = require('express')
 const app = express()
 
 app.get('/tasks', function (req, res) {
-  res.send('Hello World!')
-})
+  res.json ({
+   message: 
+   [
+    {
+        id: 1,
+        category: "Personal",
+        description: "Complete TR homework",
+        priority: 1,
+        goaldate: "19/03/20",
+        completed: false
+    },
+
+    {
+        id: 2,
+        category: "Personal",
+        description: "Renew Driving Licence",
+        priority: 1,
+        goaldate: "16/02/20",
+        completed: false
+    },
+
+    {
+        id: 3,
+        category: "Personal",
+        description: "Book theatre tickets",
+        priority: 2,
+        goaldate: "29/02/20",
+        completed: false
+    }
+
+]
+});
+});
 
 module.exports.tasks = serverless(app);
 
