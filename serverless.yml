@@ -5,12 +5,29 @@ provider:
   name: aws
   runtime: nodejs12.x
   region: eu-west-2
+  environment:
+    DB_HOST: ${file(./config.${self:provider.stage}.json):DB_HOST}
+    DB_USER: ${file(./config.${self:provider.stage}.json):DB_USER}
+    DB_PASSWORD: ${file(./config.${self:provider.stage}.json):DB_PASSWORD}
+    DB_SCHEMA: ${file(./config.${self:provider.stage}.json):DB_SCHEMA}
 
 functions:
   tasks:
-    handler: handler.tasks
+    handler: handler.task
     events:
       - http:
-          path: tasks
+          path: task
           method: get
           cors: true
+      - http:
+          path: task/{taskId}
+          method: put
+          cors: true
+      - http:
+          path: task
+          method: post
+          cors: true
+      - http:
+          path: task/{taskId}
+          method: delete
+          cors: true 
