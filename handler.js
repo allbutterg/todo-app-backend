@@ -57,8 +57,21 @@ app.post('/task', function (req, res) {
 
 // Updating tasks
 app.put('/task/:taskId', function (req, res) {
-  res.json({
-    message: 'Gauri, your PUT works!',
+
+
+connection.query('UPDATE `task` SET `task`=?, `priority`=?, `goalDate`=?, `completion`=?, `categoryId`=? where `taskId`=?', [req.body.task, req.body.priority, req.body.goalDate, req.body.completion, req.body.categoryId, req.body.taskId], function (error, results, fields) {
+  if (error) {
+    console.error("Your query had a problem with updating a task", error);
+    res.status(500).json({ errorMessage: error });
+  }
+  else {
+    res.json({ tasks: results});
+  }
+
+
+  // res.json({
+  //   message: 'Gauri, your PUT works!',
+  //   taskSaved: taskToUpdate
   });
 });
 
