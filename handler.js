@@ -79,9 +79,16 @@ connection.query(sql, taskToUpdate, function (error, results, fields) {
 
 // Deleting tasks
 app.delete('/task/:taskId', function (req, res) {
+
+  connection.query('DELETE FROM task WHERE taskId=?', [req.body.taskId], function (error, results, fields) {
+    if (error) {
+      console.error("Your query had a problem with deleting a task", error);
+      res.status(500).json({ errorMessage: error });
+    }
+    else {
+      res.json({ tasks: results});
+    }
   
-  res.json({
-    message: 'Gauri, your DELETE works!',
   });
 });
 
