@@ -7,7 +7,7 @@ app.use(express.json());
 const uuidv4 = require('uuid/v4');
 const mysql = require('mysql');
 const cors = require('cors');
-app.use(cors());
+app.use(cors()); 
 
 const connection = mysql.createConnection({
   host: process.env.DB_HOST,
