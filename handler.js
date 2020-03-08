@@ -20,7 +20,7 @@ const connection = mysql.createConnection({
 
 app.get('/task', function (req, res) {
 
-  connection.query('SELECT * FROM `description` WHERE `categoryId` = "2"', function (error, results, fields) {
+  connection.query('SELECT * FROM `task`', function (error, results, fields) {
     // error will be an Error if one occurred during the query
     if (error) {
       console.error("Your query had a problem with retrieving tasks", error);
@@ -43,7 +43,7 @@ app.post('/task', function (req, res) {
   const taskToInsert = req.body;
   taskToInsert.taskId = uuidv4();
 
-  connection.query('INSERT INTO `description` SET ?', taskToInsert, function (error, results, fields) {
+  connection.query('INSERT INTO `task` SET ?', taskToInsert, function (error, results, fields) {
     if (error) {
       console.error("Your query had a problem with inserting a new task", error);
       res.status(500).json({ errorMessage: error });
